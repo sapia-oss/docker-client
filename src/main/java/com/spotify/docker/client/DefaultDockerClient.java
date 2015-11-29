@@ -684,27 +684,29 @@ public class DefaultDockerClient implements DockerClient, Closeable {
   }
   
   @Override
-  public void load(String image, InputStream imagePayload)
-      throws DockerException, InterruptedException {
+  public void load(final String image, final InputStream imagePayload)
+                   throws DockerException, InterruptedException {
     load(image, imagePayload, new LoggingPullHandler("image stream"));
   }
   
   @Override
-  public void load(String image, InputStream imagePayload,
-      AuthConfig authConfig, ProgressHandler handler) throws DockerException,
-      InterruptedException {
+  public void load(final String image, final InputStream imagePayload,
+                   final AuthConfig authConfig, final ProgressHandler handler) 
+                   throws DockerException, InterruptedException {
     load(image, imagePayload, handler);
   }
   
   @Override
   public void load(final String image, final InputStream imagePayload, 
-      final AuthConfig authConfig) throws DockerException, InterruptedException {
+                   final AuthConfig authConfig) 
+                   throws DockerException, InterruptedException {
     load(image, imagePayload, authConfig, new LoggingPullHandler("image stream"));
   }
   
   @Override
   public void load(final String image, final InputStream imagePayload, 
-      final ProgressHandler handler) throws DockerException, InterruptedException {
+                   final ProgressHandler handler) 
+                   throws DockerException, InterruptedException {
   
     WebTarget resource = resource().path("images").path("create");
 
@@ -729,14 +731,14 @@ public class DefaultDockerClient implements DockerClient, Closeable {
   }
   
   @Override
-  public InputStream save(String image) throws DockerException, IOException,
-      InterruptedException {
+  public InputStream save(final String image) 
+      throws DockerException, IOException, InterruptedException {
     return save(image, authConfig);
   }
   
   @Override
-  public InputStream save(String image, AuthConfig authConfig) throws DockerException, IOException,
-      InterruptedException {
+  public InputStream save(final String image, final AuthConfig authConfig) 
+      throws DockerException, IOException, InterruptedException {
     WebTarget resource = resource().path("images").path(image).path("get");
     
     return request(
